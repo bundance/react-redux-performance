@@ -1,0 +1,1 @@
+export const subtractLists = (list, listToSubtract) => list.filter(listItem => !listToSubtract.includes(listItem));
