@@ -43,7 +43,7 @@ export {
 //////
 
 function _fetchCustomersDetails(searchValue, searchFilter) {
-    console.log('>>>>>>>>>>>>> _fetchCustomersDetails called');
+    console.log('>>>>>>>>>>>>> _fetchCustomersDetails called, searchValue:', searchValue);
     return {
         searchValue,
         searchFilter

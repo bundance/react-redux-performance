@@ -41,7 +41,7 @@ export default class CustomerSearch extends React.Component {
                                 Search
                             </button>
                             <div className="search-filter">
-                                <h5 className="title">Search by:</h5>
+                                <h5 className="title">{ searchValue }</h5>
                             </div>
                     </div>
                 </div>
