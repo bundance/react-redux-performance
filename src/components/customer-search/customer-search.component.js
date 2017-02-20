@@ -6,14 +6,8 @@ export default class CustomerSearch extends React.Component {
         fetchCustomersDetails: PropTypes.func.isRequired,
         handleCustomerSearchValueChange: PropTypes.func.isRequired,
         handleSearchFilterChange: PropTypes.func.isRequired,
-        searchFilter: PropTypes.string,
-        searchValue: PropTypes.string,
-        showCustomersDetails: PropTypes.bool
+        searchValue: PropTypes.string
     };
-
-    constructor(props) {
-        super(props);
-    }
 
     fetchCustomersDetails = () => {
         this.props.fetchCustomersDetails(this.props.searchValue, this.props.searchFilter);
@@ -28,7 +22,7 @@ export default class CustomerSearch extends React.Component {
     };
 
     render() {
-        const { searchFilter, searchValue, showCustomersDetails } = this.props;
+        const { searchValue } = this.props;
 
         return (
             <div>
@@ -37,7 +31,7 @@ export default class CustomerSearch extends React.Component {
                     <h3>Customer</h3>
                     <div className="customer-search__form">
                             {' '}
-                            <button onClick={ this.fetchCustomersDetails}>
+                            <button onClick={ () => this.fetchCustomersDetails()}>
                                 Search
                             </button>
                             <div className="search-filter">

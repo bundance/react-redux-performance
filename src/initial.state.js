@@ -1,3 +1,3 @@
 import { Map } from 'immutable';
 
-export default Map({});
+export default Map({ });

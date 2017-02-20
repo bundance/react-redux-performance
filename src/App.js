@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import CustomerSearch from './components/customer-search/customer-search.container';
+import Customer from './components/customer/customer.container';
 
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
         <div className="App-intro">
           Here be the Perf Test components you want to test:
             
-            <CustomerSearch />
+            <Customer />
         </div>
       </div>
     );
