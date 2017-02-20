@@ -6,10 +6,14 @@ import reducer from './state/index';
 import initialState from './initial.state';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import { devToolsEnhancer } from 'redux-devtools-extension';
+import Perf from 'react-addons-perf';
+window.Perf = Perf;
 
 let store = createStore(
     reducer,
-    initialState
+    initialState,
+    devToolsEnhancer()
 );
 
 render(
