@@ -1,11 +1,16 @@
 import { connect } from 'react-redux';
 import ToDoList from './todo-list.component';
-import { onRefreshClick } from '../../state/todo-list/todo-list.actions';
+import { 
+    onRefreshClick, 
+    onTodoChange,
+    addTodo 
+} from '../../state/todo-list/todo-list.actions';
 import selectors from '../../state/todo-list/todo-list.selectors';
-console.log({ selectors });
+
 const mapStateToProps = (state) => {
     console.log({ state});
     const retVal = {
+        newTodo: selectors.getNewTodo(state),
         todos: selectors.getTodos(state),
         refreshCount: selectors.getRefreshCount(state)
     };
@@ -15,7 +20,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = ({
-    onRefreshClick
+    onRefreshClick,
+    onTodoChange,
+    addTodo
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDoList); 

@@ -6,7 +6,7 @@ import * as toDoListKeys from '../../constants/todo-list/todo-list.constants';
 export const todoList = immLens(toDoListKeys.TODO_LIST);
 export const todos = immLens(toDoListKeys.TODOS);
 export const refreshCount = immLens(toDoListKeys.REFRESH_COUNT);
-
+export const newTodo = immLens(toDoListKeys.NEW_TODO);
 
 const getTodos = view(compose(
     todoList,
@@ -19,7 +19,13 @@ const getRefreshCount = view(compose(
 ));
 
 
+const getNewTodo = view(compose(
+    todoList,
+    newTodo
+));
+
 export default {
+    getNewTodo,
     getTodos,
     getRefreshCount
 }
