@@ -10,7 +10,7 @@ const Customer = ({
         <button onClick={ () => addButtonInstance()}>
             Search
         </button>
-        {buttonInstances.map(instance => (
+        {buttonInstances && buttonInstances.map(instance => (
             <CustomerSearch key={instance} />
         ))}
     </div>

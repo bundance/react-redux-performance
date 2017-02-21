@@ -5,8 +5,9 @@ import { compose, view } from 'ramda';
 export const customerLens = immLens('customer');
 export const customerInstancesLens = immLens('instances');
 
-export const getInstances = view(compose(
+
+export const getInstances = state => view(compose(
     customerLens, 
     customerInstancesLens
-));
+), state);
 

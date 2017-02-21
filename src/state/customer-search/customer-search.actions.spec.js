@@ -9,9 +9,9 @@ describe('Test Action Creators', () => {
         actionCreator = require('./customer-search.actions');
     });
 
-    it('should create a CUSTOMERS_DETAILS_FETCH action', () => {
+    it('should create a CUSTOMERS_BUTTON_CLICK action', () => {
         expect(actionCreator.fetchCustomersDetails('keith', 'username')).toEqual({
-            type: customerSearchActions.CUSTOMERS_DETAILS_FETCH,
+            type: customerSearchActions.CUSTOMERS_BUTTON_CLICK,
             payload: {
                 searchFilter: 'username',
                 searchValue: 'keith'
