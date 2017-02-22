@@ -21,7 +21,7 @@ function addTodo(state, action) {
     const updatedTodos = state
         .getIn([todoListConstants.TODOS])
         .push(fromJS({ text: action.payload, completed: false }));
-
+    
     return state.updateIn([todoListConstants.TODOS], () => updatedTodos );
 }
 

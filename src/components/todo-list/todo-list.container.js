@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import ToDoList from './todo-list.component';
+import { toJS } from '../../utils/immutable-utils/to-js';
 import { 
     onRefreshClick, 
     onTodoChange,
@@ -7,17 +8,11 @@ import {
 } from '../../state/todo-list/todo-list.actions';
 import selectors from '../../state/todo-list/todo-list.selectors';
 
-const mapStateToProps = (state) => {
-    console.log({ state});
-    const retVal = {
-        newTodo: selectors.getNewTodo(state),
-        todos: selectors.getTodos(state),
-        refreshCount: selectors.getRefreshCount(state)
-    };
-    console.log({ retVal });
-    
-    return retVal;
-};
+const mapStateToProps = (state) => ({
+    newTodo: selectors.getNewTodo(state),
+    todos: selectors.getTodos(state),
+    refreshCount: selectors.getRefreshCount(state)
+});
 
 const mapDispatchToProps = ({
     onRefreshClick,
@@ -25,4 +20,4 @@ const mapDispatchToProps = ({
     addTodo
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ToDoList); 
+export default connect(mapStateToProps, mapDispatchToProps)(toJS(ToDoList));

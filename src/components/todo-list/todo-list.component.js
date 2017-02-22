@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
+import Todo from '../todo/todo.component';
+import './todo-list.css';
 
 class ToDoList extends React.Component {
     static propTypes = {
         addTodo: PropTypes.func.isRequired,
-        todos: PropTypes.object,
+        todos: PropTypes.array,
         refreshCount: PropTypes.number.isRequired,
         onRefreshClick: PropTypes.func.isRequired,
         onTodoChange: PropTypes.func.isRequired,
@@ -15,16 +17,17 @@ class ToDoList extends React.Component {
     }
 
     render() {
-        const { addTodo, refreshCount, onRefreshClick, newTodo, onTodoChange } = this.props;
+        const { addTodo, refreshCount, onRefreshClick, newTodo, onTodoChange, todos } = this.props;
         
         return (
-            <div>
+            <div className="todo-list">
                 <input type="text" name="todo" onChange={onTodoChange}/>
                 <button onClick={() => addTodo(newTodo)}>Add ToDo</button>
                 <ul>
-                    <li>
-                        <div>Here be a Todo</div>
-                    </li>
+                    {todos && todos.map((todo, index) =>
+                        <li key={index}>
+                            <Todo todo={todo} />
+                        </li>)}
                 </ul>
                 <div>
                     RefreshCount: {refreshCount}

@@ -13,9 +13,10 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <div className="App-intro">
-          Here be the Perf Test components you want to test:
-            
-            <TodoList />
+          <h3>The Legendary ToDo List</h3>
+            <div>
+                <TodoList />
+            </div>
         </div>
       </div>
     );
