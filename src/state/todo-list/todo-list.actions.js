@@ -29,7 +29,5 @@ export {
 ////////
 
 function onNewTodoChange(evt) {
-    console.log('newTodo:', evt.target.value);
-
     return evt.target.value;
 }

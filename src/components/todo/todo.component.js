@@ -8,7 +8,6 @@ Todo.proptypes = {
 export default function Todo({
     todo
 })  {
-    console.log({ todo });
     return (
         <div className={todo.completed ? 'completed' : 'uncompleted'}>
             ToDo: {todo.text}

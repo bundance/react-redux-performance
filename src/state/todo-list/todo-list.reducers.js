@@ -26,6 +26,5 @@ function addTodo(state, action) {
 }
 
 function todoChange(state, action) {
-    console.log({ action });
     return state.setIn([todoListConstants.NEW_TODO], action.payload);
 }
