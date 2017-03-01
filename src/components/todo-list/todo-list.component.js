@@ -6,8 +6,6 @@ class ToDoList extends React.Component {
     static propTypes = {
         addTodo: PropTypes.func.isRequired,
         todos: PropTypes.array,
-        refreshCount: PropTypes.number.isRequired,
-        onRefreshClick: PropTypes.func.isRequired,
         onTodoChange: PropTypes.func.isRequired,
         toggleCompleted: PropTypes.func.isRequired,
         newTodo: PropTypes.string
@@ -26,7 +24,7 @@ class ToDoList extends React.Component {
     };
     
     render() {
-        const { addTodo, refreshCount, onRefreshClick, newTodo, onTodoChange, todos, toggleCompleted } = this.props;
+        const { addTodo, newTodo, onTodoChange, todos, toggleCompleted } = this.props;
         const { hideCompleted } = this.state;
         console.log({ todos });
         return (
@@ -45,12 +43,6 @@ class ToDoList extends React.Component {
                     <button onClick={() => this.onToggleHideCompleted()}>
                         {hideCompleted ? 'Unh' : 'H'}ide Completed
                     </button>
-                </div>
-                <div>
-                    RefreshCount: {refreshCount}
-                </div>
-                <div>
-                    <button onClick={() => onRefreshClick()}>Refresh</button>
                 </div>
             </div>
         )

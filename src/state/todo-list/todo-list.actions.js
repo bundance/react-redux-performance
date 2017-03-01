@@ -9,13 +9,11 @@ const actions = createActions(
         [toDoListActions.TODO_LIST_TODO_CHANGE]: onNewTodoChange,
         [toDoListActions.TODO_LIST_TOGGLE_COMPLETED]: onToggleCompleted
     },
-    toDoListActions.TODO_LIST_REFRESH,
     toDoListActions.TODO_LIST_ADD_TODO
 );
 
 // Destructure action creators from actions object
 const {
-    todoListRefresh,
     todoListAddTodo,
     todoListTodoChange,
     todoListToggleCompleted
@@ -23,7 +21,6 @@ const {
 
 // Rename and Export Public Action Creators
 export {
-    todoListRefresh as onRefreshClick,
     todoListAddTodo as addTodo,
     todoListTodoChange as onTodoChange,
     todoListToggleCompleted as toggleCompleted
