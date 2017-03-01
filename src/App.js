@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Customer from './components/customer/customer.container';
-
+import TodoList from './components/todo-list/todo-list.container';
 
 class App extends Component {
   render() {
@@ -10,12 +9,12 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+            <h2>The Legendary ToDo List</h2>
         </div>
         <div className="App-intro">
-          Here be the Perf Test components you want to test:
-            
-            <Customer />
+            <div>
+                <TodoList />
+            </div>
         </div>
       </div>
     );
