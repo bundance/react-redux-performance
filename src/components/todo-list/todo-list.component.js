@@ -26,7 +26,7 @@ class ToDoList extends React.Component {
     render() {
         const { addTodo, newTodo, onTodoChange, todos, toggleCompleted } = this.props;
         const { hideCompleted } = this.state;
-        console.log({ todos });
+
         return (
             <div className="todo-list">
                 <input type="text" name="todo" onChange={onTodoChange}/>
