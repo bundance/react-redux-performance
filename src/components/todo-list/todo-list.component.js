@@ -26,29 +26,33 @@ class ToDoList extends React.Component {
     onAddTodo = () => {
         this.props.addTodo(this.props.newTodo);
     };
+    
+    onToDoChange = (event) => {
+        this.props.onTodoChange(event.target.value)
+    };
 
-    onToggleCompleted = () => {
-        this.props.toggleCompleted();
+    onToggleCompleted = (event) => {
+        this.props.toggleCompleted(event.target.name, event.target.value === 'on');
     };
     
     render() {
-        const { onTodoChange, todos, toggleCompleted } = this.props;
+        const { todos } = this.props;
         const { hideCompleted } = this.state;
 
         return (
             <div className="todo-list">
-                <input type="text" name="todo" onChange={onTodoChange}/>
+                <input type="text" name="todo" onChange={this.onToDoChange}/>
                 <button onClick={this.onAddTodo}>Add ToDo</button>
                 <ul>
                     {todos && todos.map((todo, index) =>
                     (!hideCompleted || !todo.completed) &&
                         <li key={index}>
-                            <input type="checkbox" name={todo.id} checked={todo.completed} onChange={this.toggleCompleted} />
+                            <input type="checkbox" name={todo.id} checked={todo.completed} onChange={this.onToggleCompleted} />
                             <Todo todo={todo} />
                         </li>)}
                 </ul>
                 <div>
-                    <button onClick={this.onToggleCompleted}>
+                    <button onClick={this.onToggleHideCompleted}>
                         {hideCompleted ? 'Unh' : 'H'}ide Completed
                     </button>
                 </div>
