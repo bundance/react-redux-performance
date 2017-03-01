@@ -13,10 +13,11 @@ export default handleActions({
 function addTodo(state, action) {
     const [...todos] = state.getIn([todoListConstants.TODOS]).keys();
     const id = todos ? todos.length : 0;
+    const text = state.get(todoListConstants.NEW_TODO);
 
     return state.mergeIn([todoListConstants.TODOS], fromJS({
         [id]: {
-            [todoListConstants.TEXT]: action.payload,
+            [todoListConstants.TEXT]: text,
             [todoListConstants.COMPLETED]: false, id
         }
     }));
