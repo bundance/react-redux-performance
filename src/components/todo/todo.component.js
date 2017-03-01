@@ -9,8 +9,8 @@ export default function Todo({
     todo
 })  {
     return (
-        <div className={todo.completed ? 'completed' : 'uncompleted'}>
+        <span className={todo.completed ? 'completed' : 'uncompleted'}>
             ToDo: {todo.text}
-        </div>
+        </span>
     )
 }

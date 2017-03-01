@@ -1,6 +1,7 @@
 import { immLens } from '../../utils/immutable-utils/immlens';
-import { compose, view } from 'ramda';
+import { compose, map, view } from 'ramda';
 import * as toDoListKeys from '../../constants/todo-list/todo-list.constants';
+import { asList } from '../../utils/immutable-utils/convert-types';
 
 /******************************************* SELECTORS ***********************************************/
 export const todoList = immLens(toDoListKeys.TODO_LIST);
@@ -8,10 +9,15 @@ export const todos = immLens(toDoListKeys.TODOS);
 export const refreshCount = immLens(toDoListKeys.REFRESH_COUNT);
 export const newTodo = immLens(toDoListKeys.NEW_TODO);
 
-const getTodos = view(compose(
-    todoList,
-    todos
-));
+const getTodos = state => (
+    compose(
+        asList,
+        view(compose(
+            todoList,
+            todos
+        ))
+    )(state)
+);
 
 const getRefreshCount = view(compose(
     todoList,
@@ -24,8 +30,11 @@ const getNewTodo = view(compose(
     newTodo
 ));
 
+const getTodoById = (id, state) => find(todo => todo.id === id, getTodos(state));
+
 export default {
     getNewTodo,
+    getRefreshCount,
     getTodos,
-    getRefreshCount
+    getTodoById
 }

@@ -4,7 +4,8 @@ import { toJS } from '../../utils/immutable-utils/to-js';
 import { 
     onRefreshClick, 
     onTodoChange,
-    addTodo 
+    addTodo,
+    toggleCompleted
 } from '../../state/todo-list/todo-list.actions';
 import selectors from '../../state/todo-list/todo-list.selectors';
 
@@ -17,7 +18,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = ({
     onRefreshClick,
     onTodoChange,
-    addTodo
+    addTodo,
+    toggleCompleted
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(toJS(ToDoList));
