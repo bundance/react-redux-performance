@@ -4,22 +4,24 @@ import { asList } from '../../utils/immutable-utils/convert-types';
 
 
 /******************************************* SELECTORS ***********************************************/
-const todoListSelector = state => state.get(toDoListKeys.TODO_LIST);
-const todosSelector = state => state.get(toDoListKeys.TODOS);
-const newTodoSelector = state => state.get(toDoListKeys.NEW_TODO);
+const todosSelector = state => state.getIn([toDoListKeys.TODO_LIST, toDoListKeys.TODOS]);
+const newTodoSelector = state => state.getIn(toDoListKeys.NEW_TODO);
 
 
 const getTodos = createSelector(
-    [todoListSelector, todosSelector],
-    todos => {
-        const retVal = asList(todos);
-        console.log('getTodos called, returning: ', retVal);
-        return retVal;
+    todosSelector,
+    (todos) => {
+        console.log('getTodosSelector called');
+        return asList(todos);
     }
 );
 
 const getNewTodo = createSelector(
-    [todoListSelector, newTodoSelector]
+    newTodoSelector,
+    (newTodo) => {
+        console.log('getNewTodoSelector called');
+        return newTodo
+    }
 );
 
 export default {

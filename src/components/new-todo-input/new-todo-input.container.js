@@ -1,22 +1,20 @@
 import { connect } from 'react-redux';
-import ToDoList from './todo-list.component';
+import NewTodoInput from './new-todo-input.component';
 import { toJS } from '../../utils/immutable-utils/to-js';
-import { 
+import {
     onTodoChange,
-    addTodo,
-    toggleCompleted
+    addTodo
 } from '../../state/todo-list/todo-list.actions';
 import selectors from '../../state/todo-list/todo-list.reselectors';
 import WhyDidYouUpdate from '../../utils/perf/why-did-you-update';
 
 const mapStateToProps = (state) => ({
-    todos: selectors.getTodos(state)
+    newTodo: selectors.getNewTodo(state)
 });
 
 const mapDispatchToProps = ({
     onTodoChange,
-    addTodo,
-    toggleCompleted
+    addTodo
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WhyDidYouUpdate(toJS(ToDoList)));
+export default connect(mapStateToProps, mapDispatchToProps)(WhyDidYouUpdate(toJS(NewTodoInput)));

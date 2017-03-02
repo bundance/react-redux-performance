@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import Todo from '../todo/todo.component';
 import './todo-list.css';
+import NewTodoInput from '../new-todo-input/new-todo-input.container';
 
 class ToDoList extends React.Component {
     static propTypes = {
         addTodo: PropTypes.func.isRequired,
         todos: PropTypes.array,
         onTodoChange: PropTypes.func.isRequired,
-        toggleCompleted: PropTypes.func.isRequired,
-        newTodo: PropTypes.string
+        toggleCompleted: PropTypes.func.isRequired
     };
 
     constructor(props) {
@@ -23,14 +23,6 @@ class ToDoList extends React.Component {
         this.setState({ hideCompleted: !this.state.hideCompleted })
     };
     
-    onAddTodo = () => {
-        this.props.addTodo(this.props.newTodo);
-    };
-    
-    onToDoChange = (event) => {
-        this.props.onTodoChange(event.target.value)
-    };
-
     onToggleCompleted = (event) => {
         this.props.toggleCompleted(event.target.name, event.target.value === 'on');
     };
@@ -41,8 +33,7 @@ class ToDoList extends React.Component {
 
         return (
             <div className="todo-list">
-                <input type="text" name="todo" onChange={this.onToDoChange}/>
-                <button onClick={this.onAddTodo}>Add ToDo</button>
+                <NewTodoInput />
                 <ul>
                     {todos && todos.map((todo, index) =>
                     (!hideCompleted || !todo.completed) &&

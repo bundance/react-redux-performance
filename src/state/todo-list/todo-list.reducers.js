@@ -10,7 +10,7 @@ export default handleActions({
 }, initialState);
 
 
-function addTodo(state, action) {
+function addTodo(state) {
     const [...todos] = state.getIn([todoListConstants.TODOS]).keys();
     const id = todos ? todos.length : 0;
     const text = state.get(todoListConstants.NEW_TODO);
