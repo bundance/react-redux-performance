@@ -7,6 +7,7 @@ import {
     toggleCompleted
 } from '../../state/todo-list/todo-list.actions';
 import selectors from '../../state/todo-list/todo-list.selectors';
+import WhyDidYouUpdate from '../../utils/perf/why-did-you-update';
 
 const mapStateToProps = (state) => ({
     newTodo: selectors.getNewTodo(state),
@@ -19,4 +20,4 @@ const mapDispatchToProps = ({
     toggleCompleted
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(toJS(ToDoList));
+export default connect(mapStateToProps, mapDispatchToProps)(WhyDidYouUpdate(toJS(ToDoList)));
