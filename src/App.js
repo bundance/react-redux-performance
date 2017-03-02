@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import TodoList from './components/todo-list/todo-list.container';
+import TodoList from './components/todo-list/todo-list.component.js';
 
 class App extends Component {
   render() {
