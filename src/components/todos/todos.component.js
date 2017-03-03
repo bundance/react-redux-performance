@@ -4,7 +4,6 @@ import Todo from '../todo/todo.component';
 export default class Todos extends React.PureComponent {
     static propTypes = {
         todos: PropTypes.array,
-        hideCompleted: PropTypes.bool,
         toggleCompleted: PropTypes.func.isRequired
     };
 
@@ -13,8 +12,8 @@ export default class Todos extends React.PureComponent {
     };
 
     render() {
-        const { hideCompleted, todos } = this.props;
-        
+        const { todos } = this.props;
+        console.log({ todos });
         return(
            <ul>
                {todos && todos.map((todo, index) => (

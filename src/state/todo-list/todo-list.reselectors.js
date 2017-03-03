@@ -36,10 +36,16 @@ const getVisibleTodos = createSelector(
     (todos) => {
         const isUncompleted = todo => !todo.get('completed');
 
-        const visibleTodos = filter(isUncompleted, todos);
-        console.log({ visibleTodos });
-        
-        return asList(visibleTodos);
+        return asList(filter(isUncompleted, todos));
+    }
+);
+
+const getCompletedTodos = createSelector(
+    todosSelector,
+    (todos) => {
+        const isCompleted = todo => todo.get('completed');
+
+        return asList(filter(isCompleted, todos));
     }
 );
 
@@ -47,5 +53,6 @@ const getVisibleTodos = createSelector(
 export default {
     getNewTodo,
     getTodos,
-    getVisibleTodos
+    getVisibleTodos,
+    getCompletedTodos
 }
