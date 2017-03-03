@@ -17,11 +17,11 @@ export default class Todos extends React.PureComponent {
         
         return(
            <ul>
-               {todos && todos.map((todo, index) => (!hideCompleted || !todo.completed) &&
+               {todos && todos.map((todo, index) => (
                    <li key={index}>
                        <input type="checkbox" name={todo.id} checked={todo.completed} onChange={this.onToggleCompleted} />
                        <Todo todo={todo} />
-                   </li>)
+                   </li>))
                }
            </ul>
        ) 

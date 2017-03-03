@@ -12,9 +12,14 @@ export const newTodo = immLens(toDoListKeys.NEW_TODO);
 let getTodosCount = 0;
 let getNewTodoCount = 0;
 
-const getTodos = memoize(state => {
+const getTodos = state => {
+    return _getTodos(state);
+};
+
+function _getTodos(state) {
     getTodosCount += 1;
-    console.log('in getTodos, getTodosCount=', getTodosCount);
+    console.log('in _getTodos, getTodosCount=', getTodosCount);
+
     return compose(
         asList,
         view(compose(
@@ -22,7 +27,7 @@ const getTodos = memoize(state => {
             todos
         ))
     )(state)
-});
+}
 
 const getNewTodo = memoize(state => {
     getNewTodoCount += 1;

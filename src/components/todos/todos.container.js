@@ -7,8 +7,8 @@ import {
 import selectors from '../../state/todo-list/todo-list.reselectors.js';
 import WhyDidYouUpdate from '../../utils/perf/why-did-you-update';
 
-const mapStateToProps = (state) => ({
-    todos: selectors.getTodos(state)
+const mapStateToProps = (state, ownProps) => ({
+    todos: ownProps.hideCompleted ? selectors.getVisibleTodos(state) : selectors.getTodos(state)
 });
 
 const mapDispatchToProps = ({
