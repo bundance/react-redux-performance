@@ -13,7 +13,7 @@ export default class Todos extends React.PureComponent {
 
     render() {
         const { todos } = this.props;
-        console.log({ todos });
+
         return(
            <ul>
                {todos && todos.map((todo, index) => (

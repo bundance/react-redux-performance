@@ -6,11 +6,9 @@ export default class Todo extends React.Component {
         todo: PropTypes.object
     };
 
-    // This stop unnecessary todo renders
-    shouldComponentUpdate(nextProps) {
-        return !(nextProps.todo.completed === this.props.todo.completed
-            && nextProps.todo.id === this.props.todo.id
-            && nextProps.todo.text === this.props.todo.text)
+    // This stops unnecessary renders of the ToDo component, but only by comparing Todo.text
+    shouldComponentUpdate(nextProps, nextState) {
+        return !(nextProps.todo.text === this.props.todo.text);
     }
 
     render() {

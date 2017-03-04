@@ -18,7 +18,8 @@ function addTodo(state) {
     return state.mergeIn([todoListConstants.TODOS], fromJS({
         [id]: {
             [todoListConstants.TEXT]: text,
-            [todoListConstants.COMPLETED]: false, id
+            [todoListConstants.COMPLETED]: false,
+            id
         }
     }));
 }

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Todos from '../todos/todos.component.js';
+import CompletedTodos from './completed-todos.component';
 import { toJS } from '../../utils/immutable-utils/to-js';
 import { toggleCompleted } from '../../state/todo-list/todo-list.actions.js';
 import selectors from '../../state/todo-list/todo-list.reselectors.js';
@@ -13,4 +13,4 @@ const mapDispatchToProps = ({
     toggleCompleted
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WhyDidYouUpdate(toJS(Todos)));
+export default connect(mapStateToProps, mapDispatchToProps)(WhyDidYouUpdate(toJS(CompletedTodos)));

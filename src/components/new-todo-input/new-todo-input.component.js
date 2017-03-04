@@ -3,12 +3,11 @@ import React, { PropTypes } from 'react';
 export default class NewTodoInput extends React.PureComponent {
     static propTypes = {
         onTodoChange: PropTypes.func.isRequired,
-        newTodo: PropTypes.string,
         addTodo: PropTypes.func.isRequired
     };
 
     onAddTodo = () => {
-        this.props.addTodo(this.props.newTodo);
+        this.props.addTodo();
     };
 
     onToDoChange = (event) => {

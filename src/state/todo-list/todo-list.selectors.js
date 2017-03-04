@@ -1,44 +1,47 @@
 import { immLens } from '../../utils/immutable-utils/immlens';
-import { compose, memoize, view } from 'ramda';
+import { compose, filter, memoize, view } from 'ramda';
+// import memoize from 'memoize-immutable';
 import * as toDoListKeys from '../../constants/todo-list/todo-list.constants';
 import { asList } from '../../utils/immutable-utils/convert-types';
 import { fromJS } from 'immutable';
+import { trace } from '../../utils/dev/trace';
+import { createSelector } from 'reselect';
+
+console.log(':::::::::: selectors called ::::::::::::::');
 
 /******************************************* SELECTORS ***********************************************/
 export const todoList = immLens(toDoListKeys.TODO_LIST);
 export const todos = immLens(toDoListKeys.TODOS);
-export const newTodo = immLens(toDoListKeys.NEW_TODO);
 
-let getTodosCount = 0;
-let getNewTodoCount = 0;
 
-const getTodos = state => {
-    return _getTodos(state);
+const _getVisibleTodos = todos => {
+    const isUncompleted = todo => !todo.get('completed');
+
+    console.log('****** _getVisibleTodos called *******');
+
+    return asList(filter(isUncompleted, todos));
 };
 
-function _getTodos(state) {
-    getTodosCount += 1;
-    console.log('in _getTodos, getTodosCount=', getTodosCount);
+const _getCompletedTodos = todos => {
+    const isCompleted = todo => todo.get('completed');
 
-    return compose(
-        asList,
-        view(compose(
-            todoList,
-            todos
-        ))
-    )(state)
-}
+    console.log('****** getCompletedTodos called *******');
 
-const getNewTodo = memoize(state => {
-    getNewTodoCount += 1;
-    console.log('>>>> In getNewTodo, getNewTodoCount = ', getNewTodoCount);
-    return view(compose(
-        todoList,
-        newTodo
-    ))(state);
-});
+    return asList(filter(isCompleted, todos));
+};
+
+
+const getVisibleTodos = state => _getVisibleTodos(_getTodos(state));
+const getCompletedTodos = state => _getCompletedTodos(_getTodos(state));
+
 
 export default {
-    getNewTodo,
-    getTodos
+    getCompletedTodos,
+    getVisibleTodos
+}
+
+//////
+
+function _getTodos(state) {
+    return view(compose(todoList, todos))(state);
 }

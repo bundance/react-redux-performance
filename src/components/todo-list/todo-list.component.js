@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Todos from '../todos/todos.container.js';
 import CompletedTodos from '../completed-todos/completed-todos.container.js';
 import './todo-list.css';

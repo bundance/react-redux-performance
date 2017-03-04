@@ -1,58 +1,37 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 import * as toDoListKeys from '../../constants/todo-list/todo-list.constants';
 import { asList } from '../../utils/immutable-utils/convert-types';
 import { filter } from 'ramda';
+import { Iterable } from 'immutable';
 
-import { fromJS } from 'immutable';
+console.log(':::::::::: REselectors called ::::::::::::::');
 
 /******************************************* SELECTORS ***********************************************/
 
-const todosSelector = state => state.getIn([toDoListKeys.TODO_LIST, toDoListKeys.TODOS]);
-const newTodoSelector = state => state.getIn(toDoListKeys.NEW_TODO);
-
-let getTodosCount = 0;
-
-const getTodos = createSelector(
-    todosSelector,
-    (todos) => {
-        getTodosCount += 1;
-        console.log('in _getTodos, getTodosCount=', getTodosCount);
-        
-        console.log('getTodosSelector called');
-        return asList(todos);
-    }
-);
-
-const getNewTodo = createSelector(
-    newTodoSelector,
-    (newTodo) => {
-        console.log('getNewTodoSelector called');
-        return newTodo
-    }
-);
+const todosSelector = state => Iterable.isIterable(state) && state.getIn([toDoListKeys.TODO_LIST, toDoListKeys.TODOS]);
 
 const getVisibleTodos = createSelector(
     todosSelector,
     (todos) => {
         const isUncompleted = todo => !todo.get('completed');
-
-        return asList(filter(isUncompleted, todos));
+        const getVisibleTodosRetVal = asList(filter(isUncompleted, todos));
+        console.log({ getVisibleTodosRetVal});
+        return getVisibleTodosRetVal;
     }
 );
+
 
 const getCompletedTodos = createSelector(
     todosSelector,
     (todos) => {
         const isCompleted = todo => todo.get('completed');
-
-        return asList(filter(isCompleted, todos));
+        const getCompletedTodosRetVal = asList(filter(isCompleted, todos));
+        console.log({ getCompletedTodosRetVal });
+        return getCompletedTodosRetVal;
     }
 );
 
-
 export default {
-    getNewTodo,
-    getTodos,
     getVisibleTodos,
     getCompletedTodos
 }
