@@ -27,5 +27,6 @@ const getVisibleTodos = createSelector(
 export default {
     getAllTodos: compose(asList, todosSelector),
     getCompletedTodos: compose(asList, completedTodosSelector),
-    getUncompletedTodos: compose(asList, unCompletedTodosSelector)
+    getUncompletedTodos: compose(asList, unCompletedTodosSelector),
+    getVisibleTodos
 }

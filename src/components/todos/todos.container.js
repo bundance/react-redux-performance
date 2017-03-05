@@ -5,14 +5,9 @@ import { toggleCompleted } from '../../state/todo-list/todo-list.actions.js';
 import selectors from '../../state/todo-list/todo-list.selectors.js';
 import WhyDidYouUpdate from '../../utils/perf/why-did-you-update';
 
-const mapStateToProps = (state) => {
-    const mapStateToPropsTodos = {
-        todos: selectors.getAllTodos(state)
-    };
-    console.log({ mapStateToPropsTodos});
-
-    return mapStateToPropsTodos;
-};
+const mapStateToProps = (state) => ({
+    todos: selectors.getAllTodos(state)
+});
 
 const mapDispatchToProps = ({
     toggleCompleted

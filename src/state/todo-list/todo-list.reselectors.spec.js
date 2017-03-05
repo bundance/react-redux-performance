@@ -2,7 +2,7 @@ import reselectors from './todo-list.reselectors';
 import * as toDoListKeys from '../../constants/todo-list/todo-list.constants';
 import { fromJS } from  'immutable';
 
-describe('reselector tests', () => {
+describe.skip('reselector tests', () => {
 
     let state = fromJS({
         [toDoListKeys.TODO_LIST]: {
