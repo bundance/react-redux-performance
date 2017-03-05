@@ -32,6 +32,7 @@ const getCompletedTodos = createSelector(
 );
 
 export default {
+    getAllTodos: todosSelector,
     getVisibleTodos,
     getCompletedTodos
 }
