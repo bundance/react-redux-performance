@@ -6,7 +6,7 @@ import { Iterable } from 'immutable';
 
 console.log(':::::::::: REselectors called ::::::::::::::');
 
-/******************************************* SELECTORS ***********************************************/
+/******************************************* RESELECT SELECTORS *****************************************/
 
 const todosSelector = state => Iterable.isIterable(state) && state.getIn([toDoListKeys.TODO_LIST, toDoListKeys.TODOS]);
 
