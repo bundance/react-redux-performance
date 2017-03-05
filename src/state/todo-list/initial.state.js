@@ -3,5 +3,7 @@ import * as todoListConstants from '../../constants/todo-list/todo-list.constant
 
 export default fromJS({
     [todoListConstants.TODOS]: {},
+    [todoListConstants.COMPLETED_TODOS]: {},
+    [todoListConstants.UNCOMPLETED_TODOS]: {},
     [todoListConstants.NEW_TODO]: ''
 });

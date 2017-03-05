@@ -12,9 +12,7 @@ export default class Todo extends React.Component {
     }
 
     render() {
-
         const { todo } = this.props;
-
         return (
             <span className={todo.completed ? 'completed' : 'uncompleted'}>
                 ToDo: {todo.text}

@@ -4,6 +4,8 @@ import * as toDoListKeys from '../../constants/todo-list/todo-list.constants';
 import { asList } from '../../utils/immutable-utils/convert-types';
 import { fromJS } from 'immutable';
 
+import { trace } from '../../utils/dev/trace';
+
 console.log(':::::::::: selectors called ::::::::::::::');
 
 /******************************************* RAMDA LENS SELECTORS *******************************************/
@@ -29,8 +31,14 @@ console.log(':::::::::: selectors called ::::::::::::::');
 
 export const todoList = immLens(toDoListKeys.TODO_LIST);
 export const todos = immLens(toDoListKeys.TODOS);
+export const completedTodos = immLens(toDoListKeys.COMPLETED_TODOS);
+export const uncompletedTodos = immLens(toDoListKeys.UNCOMPLETED_TODOS);
 
+const _getTodoList = view(todoList);
 const _getTodos = view(compose(todoList, todos));
+const _getCompletedTodos = view(compose(todoList, completedTodos));
+const _getUncompletedTodos = view(compose(todoList, uncompletedTodos));
+
 
 // Memoize the todos, as these are independent from the newToDo property, and will only change when the
 // todos themselves have changed (in which case, you don't want a memoized version of them)
@@ -42,7 +50,7 @@ const _getVisibleTodos = memoize(todos => {
     return asList(filter(isUncompleted, todos));
 });
 
-const _getCompletedTodos = memoize(todos => {
+const _getCompletedTodos1 = memoize(todos => {
     const isCompleted = todo => todo.get('completed');
 
     console.log('****** getCompletedTodos called *******');
@@ -50,14 +58,12 @@ const _getCompletedTodos = memoize(todos => {
     return asList(filter(isCompleted, todos));
 });
 
-// You can't memoize the state, as it's the whole root object, and so will always change when any prop changes
-const getVisibleTodos = state => _getVisibleTodos(_getTodos(state));
-const getCompletedTodos = state => _getCompletedTodos(_getTodos(state));
-
 
 export default {
-    getCompletedTodos,
-    getVisibleTodos
+    getAllTodos: compose(memoize(todos => asList(todos)), _getTodos),
+    getCompletedTodos: compose(memoize(completedTodos => asList(completedTodos)), _getCompletedTodos),
+    getUncompletedTodos: compose(memoize(uncompletedTodos => asList(uncompletedTodos)), _getUncompletedTodos),
+    getVisibleTodos: compose(asList, _getVisibleTodos)
 }
 
 

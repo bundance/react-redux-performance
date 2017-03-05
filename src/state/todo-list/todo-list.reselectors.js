@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import * as toDoListKeys from '../../constants/todo-list/todo-list.constants';
 import { asList } from '../../utils/immutable-utils/convert-types';
+import { compose } from 'ramda';
 import { filter } from 'ramda';
 import { Iterable } from 'immutable';
 
@@ -9,6 +10,9 @@ console.log(':::::::::: REselectors called ::::::::::::::');
 /******************************************* RESELECT SELECTORS *****************************************/
 
 const todosSelector = state => Iterable.isIterable(state) && state.getIn([toDoListKeys.TODO_LIST, toDoListKeys.TODOS]);
+const completedTodosSelector = state => Iterable.isIterable(state) && state.getIn([toDoListKeys.TODO_LIST, toDoListKeys.COMPLETED_TODOS]);
+const unCompletedTodosSelector = state => Iterable.isIterable(state) && state.getIn([toDoListKeys.TODO_LIST, toDoListKeys.UNCOMPLETED_TODOS]);
+
 
 const getVisibleTodos = createSelector(
     todosSelector,
@@ -20,18 +24,8 @@ const getVisibleTodos = createSelector(
     }
 );
 
-
-const getCompletedTodos = createSelector(
-    todosSelector,
-    (todos) => {
-        const isCompleted = todo => todo.get('completed');
-        const getCompletedTodosRetVal = asList(filter(isCompleted, todos));
-        console.log({ getCompletedTodosRetVal });
-        return getCompletedTodosRetVal;
-    }
-);
-
 export default {
-    getVisibleTodos,
-    getCompletedTodos
+    getAllTodos: compose(asList, todosSelector),
+    getCompletedTodos: compose(asList, completedTodosSelector),
+    getUncompletedTodos: compose(asList, unCompletedTodosSelector)
 }
