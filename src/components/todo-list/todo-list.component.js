@@ -33,7 +33,6 @@ class ToDoList extends React.PureComponent {
                 <h3>Uncompleted Todos</h3>
                 {!hideCompleted && <UncompletedTodos />}
 
-
                 <div>
                     <button onClick={this.onToggleHideCompleted}>
                         {hideCompleted ? 'Show' : 'Hide'} Completed

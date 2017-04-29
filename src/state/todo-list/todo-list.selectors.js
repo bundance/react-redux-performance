@@ -2,10 +2,7 @@
  * Created by michael.evans on 17/03/2017.
  */
 import { compose, memoize } from 'ramda';
-import * as toDoListKeys from '../../constants/todo-list/todo-list.constants';
 import { asList } from '../../utils/immutable-utils/convert-types';
-
-console.log(':::::::::: selectors called ::::::::::::::');
 
 /******************************************* SELECTORS *******************************************/
 
@@ -39,15 +36,13 @@ const _getUncompletedTodos = state => state.getIn(['todoList', 'unCompletedTodos
 
 
 // Memoized selectors
-export const memoizedSelectors = {
 // export default {
-    getAllTodos: compose(memoize(todos => asList(todos)), _getTodos),
-    getCompletedTodos: compose(memoize(completedTodos => asList(completedTodos)), _getCompletedTodos),
-    getUncompletedTodos: compose(memoize(uncompletedTodos => asList(uncompletedTodos)), _getUncompletedTodos)
-};
+//     getAllTodos: compose(memoize(todos => asList(todos)), _getTodos),
+//     getCompletedTodos: compose(memoize(completedTodos => asList(completedTodos)), _getCompletedTodos),
+//     getUncompletedTodos: compose(memoize(uncompletedTodos => asList(uncompletedTodos)), _getUncompletedTodos)
+// };
 
 // Unmemoized selectors
-// export const unMemoizedSelectors = {
 export default {
     getAllTodos: compose(asList, _getTodos),
     getCompletedTodos: compose(asList, _getCompletedTodos),
