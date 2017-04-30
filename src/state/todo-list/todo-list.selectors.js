@@ -36,16 +36,16 @@ const _getUncompletedTodos = state => state.getIn(['todoList', 'unCompletedTodos
 
 
 // Memoized selectors
-// export default {
-//     getAllTodos: compose(memoize(todos => asList(todos)), _getTodos),
-//     getCompletedTodos: compose(memoize(completedTodos => asList(completedTodos)), _getCompletedTodos),
-//     getUncompletedTodos: compose(memoize(uncompletedTodos => asList(uncompletedTodos)), _getUncompletedTodos)
-// };
+export default {
+    getAllTodos: compose(memoize(todos => asList(todos)), _getTodos),
+    getCompletedTodos: compose(memoize(completedTodos => asList(completedTodos)), _getCompletedTodos),
+    getUncompletedTodos: compose(memoize(uncompletedTodos => asList(uncompletedTodos)), _getUncompletedTodos)
+};
 
 // Unmemoized selectors
-export default {
-    getAllTodos: compose(asList, _getTodos),
-    getCompletedTodos: compose(asList, _getCompletedTodos),
-    getUncompletedTodos: compose(asList, _getUncompletedTodos)
-};
+// export default {
+//     getAllTodos: compose(asList, _getTodos),
+//     getCompletedTodos: compose(asList, _getCompletedTodos),
+//     getUncompletedTodos: compose(asList, _getUncompletedTodos)
+// };
 
