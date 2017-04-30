@@ -37,17 +37,47 @@ export const todoList = immLens(toDoListKeys.TODO_LIST);
 export const todos = immLens(toDoListKeys.TODOS);
 export const completedTodos = immLens(toDoListKeys.COMPLETED_TODOS);
 export const uncompletedTodos = immLens(toDoListKeys.UNCOMPLETED_TODOS);
+export const todo = id => immLens(id.toString());
 
+const _getTodo = (id, state) => {
+    console.log({ id});
+    const _getTodoRetVal = view(compose(todoList, todos, todo(id)), state);
+    console.log({ _getTodoRetVal });
+    return _getTodoRetVal;
+};
 
 const _getTodos = view(compose(todoList, todos));
 const _getCompletedTodos = view(compose(todoList, completedTodos));
 const _getUncompletedTodos = view(compose(todoList, uncompletedTodos));
 
+let prevTodos;
+let prevGetAllTodos;
+
+const getAllTodos = state => {
+    const _getAllTodos = compose(
+        memoize(todos => asList(todos)),
+        todos => {
+            console.log({ todos, prevTodos });
+            console.log('prevTodos === todos:', prevTodos === todos);
+            prevTodos = todos;
+            return todos;
+        },
+        _getTodos)(state);
+
+    console.log({ _getAllTodos , prevGetAllTodos });
+    console.log('prevGetAllTodos === _getAllTodos :', prevGetAllTodos === _getAllTodos );
+
+    prevGetAllTodos = _getAllTodos;
+
+    return _getAllTodos;
+};
+
 // Memoized selectors
 export default {
-    getAllTodos: compose(memoize(todos => asList(todos)), _getTodos),
+    getTodo: _getTodo,
+    getAllTodos,
     getCompletedTodos: compose(memoize(completedTodos => asList(completedTodos)), _getCompletedTodos),
-    getUncompletedTodos: compose(memoize(uncompletedTodos => asList(uncompletedTodos)), _getUncompletedTodos),
+    getUncompletedTodos: compose(memoize(uncompletedTodos => asList(uncompletedTodos)), _getUncompletedTodos)
 };
 
 // Unmemoized selectors

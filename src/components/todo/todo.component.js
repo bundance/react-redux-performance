@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 import './todo.css' 
 
-export default class Todo extends React.Component {
+export default class Todo extends React.PureComponent {
     static propTypes = {
         todo: PropTypes.object
+        // onClick: PropTypes.func
     };
-
+    
     // This stops unnecessary re-renders of the ToDo component. Note that it must only compare Todo.text, as this
     // is the only property of the todo object that's rendered. If you compare todo.id, the component will both
     // render when it should, and not render when it shouldn't.
@@ -14,9 +15,11 @@ export default class Todo extends React.Component {
     // tries to trigger one, as the whole point of shouldComponentUpdate is to stop wasteful re-renders!  
     //
     // To detect wasteful mapStateToProps, use the WhyDidYouUpdate HoC
-    shouldComponentUpdate(nextProps, nextState) {
-        return !(nextProps.todo.text === this.props.todo.text);
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('this.props.onClick:', this.props.onClick);
+    //     return !(nextProps.todo.text === this.props.todo.text && nextProps.onClick === this.props.onClick);
+    // }
+
 
     render() {
         const { todo } = this.props;

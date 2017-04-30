@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Todo from '../todo/todo.component';
+import Todo from '../todo/todo.container';
 
 export default class UncompletedTodos extends React.PureComponent {
     static propTypes = {

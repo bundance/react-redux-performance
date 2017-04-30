@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = ({
-    toggleCompleted
+    // toggleCompleted
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WhyDidYouUpdate(toJS(Todos)));

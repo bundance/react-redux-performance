@@ -27,11 +27,6 @@ class ToDoList extends React.PureComponent {
                 <h3>All Todos</h3>
                 <Todos hideCompleted={ false }/>
                 
-                <h3>Completed Todos</h3>
-                {!hideCompleted && <CompletedTodos />}
-
-                <h3>Uncompleted Todos</h3>
-                {!hideCompleted && <UncompletedTodos />}
 
 
                 <div>
@@ -46,4 +41,9 @@ class ToDoList extends React.PureComponent {
 
 export default ToDoList;
 
+// <h3>Completed Todos</h3>
+// {!hideCompleted && <CompletedTodos />}
+//
+// <h3>Uncompleted Todos</h3>
+// {!hideCompleted && <UncompletedTodos />}
 
