@@ -1,7 +1,8 @@
-import { fromJS } from 'immutable';
+import { keys } from 'ramda';
 import { handleActions } from 'redux-actions';
 import initialState from './initial.state';
 import * as todoListConstants from '../../constants/todo-list/todo-list.constants';
+import update from 'update-immutable';
 
 export default handleActions({
     [todoListConstants.TODO_LIST_ADD_TODO]: addTodo,
@@ -11,47 +12,77 @@ export default handleActions({
 
 
 function addTodo(state) {
-    const [...todos] = state.getIn([todoListConstants.TODOS]).keys();
+    const [...todos] = keys(state[todoListConstants.TODOS]);
     const id = todos ? todos.length : 0;
-    const text = state.get(todoListConstants.NEW_TODO);
+    const text = state[todoListConstants.NEW_TODO];
 
-    let newState = state.mergeIn([todoListConstants.TODOS], fromJS({
-        [id]: {
-            [todoListConstants.TEXT]: text,
-            [todoListConstants.COMPLETED]: false,
-            id
+    let newState = update(state, {
+        [todoListConstants.TODOS]: {
+            $merge: {
+                [id]: {
+                    [todoListConstants.TEXT]: text,
+                    [todoListConstants.COMPLETED]: false,
+                    id
+                }
+            }
+        },
+        [todoListConstants.UNCOMPLETED_TODOS]: {
+            $merge: {
+                [id]: {
+                    [todoListConstants.TEXT]: text,
+                    [todoListConstants.COMPLETED]: false,
+                    id
+                }
+            }
         }
-    }));
-
-    newState = newState.mergeIn([todoListConstants.UNCOMPLETED_TODOS], fromJS({
-        [id]: {
-            [todoListConstants.TEXT]: text,
-            [todoListConstants.COMPLETED]: false,
-            id
-        }
-    }));
-    
+    });
+    console.log({ newState });
     return newState;
 }
 
 function todoChange(state, action) {
-    return state.setIn([todoListConstants.NEW_TODO], action.payload);
+    return update(state, {
+        [todoListConstants.NEW_TODO]: {
+            $set: action.payload
+        }
+    });
 }
 
 function toggleCompleted(state, action) {
-    let todo = state.getIn([todoListConstants.TODOS, action.payload.id]);
+    let todo = state[todoListConstants.TODOS][action.payload.id];
     let newState;
-    if (todo.get(todoListConstants.COMPLETED)) {
-        todo = todo.setIn([todoListConstants.COMPLETED], false);
-        newState = state.setIn([todoListConstants.TODOS, action.payload.id, todoListConstants.COMPLETED], false);
-        newState = newState.deleteIn([todoListConstants.COMPLETED_TODOS, action.payload.id]);
-        newState = newState.setIn([todoListConstants.UNCOMPLETED_TODOS, action.payload.id], todo)
+    if (todo[todoListConstants.COMPLETED]) {
+        todo = update(todo, { [todoListConstants.COMPLETED]: { $set: false } });
+        newState = update(state, {
+            [todoListConstants.TODOS]: {
+                [action.payload.id]: {
+                    [todoListConstants.COMPLETED]: {$set: false}
+                }
+            },
+            [todoListConstants.COMPLETED_TODOS]: {
+                $unset: [action.payload.id]
+            },
+            [todoListConstants.UNCOMPLETED_TODOS]: {
+                [action.payload.id]: {$set: todo}
+            }
+        })
     } else {
-        todo = todo.setIn([todoListConstants.COMPLETED], true);
-        newState = state.setIn([todoListConstants.TODOS, action.payload.id, todoListConstants.COMPLETED], true);
-        newState = newState.deleteIn([todoListConstants.UNCOMPLETED_TODOS, action.payload.id]);
-        newState = newState.setIn([todoListConstants.COMPLETED_TODOS, action.payload.id], todo)
-    }
+        todo = update(todo, { [todoListConstants.COMPLETED]: { $set: true } });
+        newState = update(state, {
+            [todoListConstants.TODOS]: {
+                [action.payload.id]: {
+                    [todoListConstants.COMPLETED]: {$set: true}
+                }
+            },
+            [todoListConstants.COMPLETED_TODOS]: {
+                $set: { [action.payload.id]: todo }
+            },
+            [todoListConstants.UNCOMPLETED_TODOS]: {
+                $unset: [action.payload.id]
+            }
+        })
 
+    }
+    console.log({ newState});
     return newState;
 }
