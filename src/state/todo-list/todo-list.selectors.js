@@ -1,8 +1,4 @@
-/**
- * Created by michael.evans on 17/03/2017.
- */
 import { compose, memoize, values } from 'ramda';
-
 
 /******************************************* SELECTORS *******************************************/
 

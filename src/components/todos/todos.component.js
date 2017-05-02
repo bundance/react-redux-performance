@@ -4,7 +4,8 @@ import Todo from '../todo/todo.component';
 export default class Todos extends React.PureComponent {
     static propTypes = {
         todos: PropTypes.array,
-        toggleCompleted: PropTypes.func.isRequired
+        toggleCompleted: PropTypes.func.isRequired,
+        hideCompleted: PropTypes.bool
     };
 
     onToggleCompleted = (event) => {
@@ -12,13 +13,16 @@ export default class Todos extends React.PureComponent {
     };
 
     render() {
-        const { todos } = this.props;
+        const { todos, hideCompleted } = this.props;
 
         return(
            <ul>
                {todos && todos.map((todo, index) => (
-                   <li key={index}>
-                       <input type="checkbox" name={todo.id} checked={todo.completed} onChange={this.onToggleCompleted} />
+                   <li key={todo.id} className={hideCompleted && todo.completed ? 'hide' : 'show'}>
+                       <input type="checkbox" 
+                              name={todo.id} 
+                              checked={todo.completed} 
+                              onChange={this.onToggleCompleted} />
                        <Todo todo={todo} />
                    </li>))
                }

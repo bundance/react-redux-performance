@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import './todo.css' 
+import './todo.css'
 
 export default class Todo extends React.Component {
     static propTypes = {
@@ -15,13 +15,19 @@ export default class Todo extends React.Component {
     //
     // To detect wasteful mapStateToProps, use the WhyDidYouUpdate HoC
     shouldComponentUpdate(nextProps, nextState) {
-        return !(nextProps.todo.text === this.props.todo.text);
+        return !(
+            nextProps.todo.text === this.props.todo.text
+            && nextProps.todo.completed === this.props.todo.completed
+        );
     }
 
     render() {
         const { todo } = this.props;
+
+        const isCompletedClassname = todo.completed ? 'completed' : 'uncompleted';
+        
         return (
-            <span className={todo.completed ? 'completed' : 'uncompleted'}>
+            <span className={isCompletedClassname} >
                 ToDo: {todo.text}
             </span>
         )
