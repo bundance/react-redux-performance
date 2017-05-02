@@ -16,17 +16,8 @@ function addTodo(state) {
     const id = todos ? todos.length : 0;
     const text = state[todoListConstants.NEW_TODO];
 
-    let newState = update(state, {
+    return update(state, {
         [todoListConstants.TODOS]: {
-            $merge: {
-                [id]: {
-                    [todoListConstants.TEXT]: text,
-                    [todoListConstants.COMPLETED]: false,
-                    id
-                }
-            }
-        },
-        [todoListConstants.UNCOMPLETED_TODOS]: {
             $merge: {
                 [id]: {
                     [todoListConstants.TEXT]: text,
@@ -36,8 +27,6 @@ function addTodo(state) {
             }
         }
     });
-    console.log({ newState });
-    return newState;
 }
 
 function todoChange(state, action) {
@@ -50,39 +39,12 @@ function todoChange(state, action) {
 
 function toggleCompleted(state, action) {
     let todo = state[todoListConstants.TODOS][action.payload.id];
-    let newState;
-    if (todo[todoListConstants.COMPLETED]) {
-        todo = update(todo, { [todoListConstants.COMPLETED]: { $set: false } });
-        newState = update(state, {
-            [todoListConstants.TODOS]: {
-                [action.payload.id]: {
-                    [todoListConstants.COMPLETED]: {$set: false}
-                }
-            },
-            [todoListConstants.COMPLETED_TODOS]: {
-                $unset: [action.payload.id]
-            },
-            [todoListConstants.UNCOMPLETED_TODOS]: {
-                [action.payload.id]: {$set: todo}
-            }
-        })
-    } else {
-        todo = update(todo, { [todoListConstants.COMPLETED]: { $set: true } });
-        newState = update(state, {
-            [todoListConstants.TODOS]: {
-                [action.payload.id]: {
-                    [todoListConstants.COMPLETED]: {$set: true}
-                }
-            },
-            [todoListConstants.COMPLETED_TODOS]: {
-                $set: { [action.payload.id]: todo }
-            },
-            [todoListConstants.UNCOMPLETED_TODOS]: {
-                $unset: [action.payload.id]
-            }
-        })
 
-    }
-    console.log({ newState});
-    return newState;
+    return update(state, {
+        [todoListConstants.TODOS]: {
+            [action.payload.id]: {
+                [todoListConstants.COMPLETED]: { $set: !todo[todoListConstants.COMPLETED] }
+            }
+        }
+    });
 }
