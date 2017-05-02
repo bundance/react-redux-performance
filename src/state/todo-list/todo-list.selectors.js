@@ -27,21 +27,15 @@ import { compose, memoize, values } from 'ramda';
  */
 
 const selectToDos = state => state.todoList.todos;
-const selectCompletedToDos = state => state.todoList.completedTodos;
-const selectUncompletedToDos = state => state.todoList.unCompletedTodos;
 
 
 // Memoized selectors
 export default {
-    getAllTodos: compose(memoize(values), selectToDos),
-    getCompletedTodos: compose(memoize(values), selectCompletedToDos),
-    getUncompletedTodos: compose(memoize(values), selectUncompletedToDos)
+    getAllTodos: compose(memoize(values), selectToDos)
 };
 
 // Unmemoized selectors
 // export default {
 //     getAllTodos: compose(values, selectToDos),
-//     getCompletedTodos: compose(values, selectCompletedToDos),
-//     getUncompletedTodos: compose(values, selectUncompletedToDos)
 // };
 
