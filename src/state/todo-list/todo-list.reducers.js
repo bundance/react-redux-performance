@@ -10,16 +10,28 @@ export default handleActions({
 }, initialState);
 
 
-function addTodo(state, action) {
+function addTodo(state) {
     const [...todos] = state.getIn([todoListConstants.TODOS]).keys();
     const id = todos ? todos.length : 0;
+    const text = state.get(todoListConstants.NEW_TODO);
 
-    return state.mergeIn([todoListConstants.TODOS], fromJS({
+    let newState = state.mergeIn([todoListConstants.TODOS], fromJS({
         [id]: {
-            [todoListConstants.TEXT]: action.payload,
-            [todoListConstants.COMPLETED]: false, id
+            [todoListConstants.TEXT]: text,
+            [todoListConstants.COMPLETED]: false,
+            id
         }
     }));
+
+    newState = newState.mergeIn([todoListConstants.UNCOMPLETED_TODOS], fromJS({
+        [id]: {
+            [todoListConstants.TEXT]: text,
+            [todoListConstants.COMPLETED]: false,
+            id
+        }
+    }));
+    
+    return newState;
 }
 
 function todoChange(state, action) {
@@ -27,7 +39,19 @@ function todoChange(state, action) {
 }
 
 function toggleCompleted(state, action) {
-    const completed = state.getIn([todoListConstants.TODOS, action.payload.id, todoListConstants.COMPLETED]);
+    let todo = state.getIn([todoListConstants.TODOS, action.payload.id]);
+    let newState;
+    if (todo.get(todoListConstants.COMPLETED)) {
+        todo = todo.setIn([todoListConstants.COMPLETED], false);
+        newState = state.setIn([todoListConstants.TODOS, action.payload.id, todoListConstants.COMPLETED], false);
+        newState = newState.deleteIn([todoListConstants.COMPLETED_TODOS, action.payload.id]);
+        newState = newState.setIn([todoListConstants.UNCOMPLETED_TODOS, action.payload.id], todo)
+    } else {
+        todo = todo.setIn([todoListConstants.COMPLETED], true);
+        newState = state.setIn([todoListConstants.TODOS, action.payload.id, todoListConstants.COMPLETED], true);
+        newState = newState.deleteIn([todoListConstants.UNCOMPLETED_TODOS, action.payload.id]);
+        newState = newState.setIn([todoListConstants.COMPLETED_TODOS, action.payload.id], todo)
+    }
 
-    return state.setIn([todoListConstants.TODOS, action.payload.id, todoListConstants.COMPLETED], !completed);
+    return newState;
 }

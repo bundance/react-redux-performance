@@ -1,16 +1,11 @@
-import React, { PropTypes } from 'react';
-import Todo from '../todo/todo.component';
+import React from 'react';
+import Todos from '../todos/todos.container.js';
+import CompletedTodos from '../completed-todos/completed-todos.container.js';
+import UncompletedTodos from '../uncompleted-todos/uncompleted-todos.container.js';
 import './todo-list.css';
+import NewTodoInput from '../new-todo-input/new-todo-input.container';
 
-class ToDoList extends React.Component {
-    static propTypes = {
-        addTodo: PropTypes.func.isRequired,
-        todos: PropTypes.array,
-        onTodoChange: PropTypes.func.isRequired,
-        toggleCompleted: PropTypes.func.isRequired,
-        newTodo: PropTypes.string
-    };
-
+class ToDoList extends React.PureComponent {
     constructor(props) {
         super(props);
         
@@ -24,24 +19,23 @@ class ToDoList extends React.Component {
     };
     
     render() {
-        const { addTodo, newTodo, onTodoChange, todos, toggleCompleted } = this.props;
         const { hideCompleted } = this.state;
 
         return (
             <div className="todo-list">
-                <input type="text" name="todo" onChange={onTodoChange}/>
-                <button onClick={() => addTodo(newTodo)}>Add ToDo</button>
-                <ul>
-                    {todos && todos.map((todo, index) =>
-                    (!hideCompleted || !todo.completed) &&
-                        <li key={index}>
-                            <input type="checkbox" name={todo.id} checked={todo.completed} onChange={toggleCompleted} />
-                            <Todo todo={todo} />
-                        </li>)}
-                </ul>
+                <NewTodoInput />
+                <h3>All Todos</h3>
+                <Todos hideCompleted={ false }/>
+                
+                <h3>Completed Todos</h3>
+                {!hideCompleted && <CompletedTodos />}
+
+                <h3>Uncompleted Todos</h3>
+                {!hideCompleted && <UncompletedTodos />}
+
                 <div>
-                    <button onClick={() => this.onToggleHideCompleted()}>
-                        {hideCompleted ? 'Unh' : 'H'}ide Completed
+                    <button onClick={this.onToggleHideCompleted}>
+                        {hideCompleted ? 'Show' : 'Hide'} Completed
                     </button>
                 </div>
             </div>
@@ -50,3 +44,5 @@ class ToDoList extends React.Component {
 }
 
 export default ToDoList;
+
+

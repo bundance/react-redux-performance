@@ -6,10 +6,10 @@ import * as toDoListActions from '../../constants/todo-list/todo-list.constants'
 // Create action creators
 const actions = createActions(
     {
-        [toDoListActions.TODO_LIST_TODO_CHANGE]: onNewTodoChange,
         [toDoListActions.TODO_LIST_TOGGLE_COMPLETED]: onToggleCompleted
     },
-    toDoListActions.TODO_LIST_ADD_TODO
+    toDoListActions.TODO_LIST_ADD_TODO,
+    toDoListActions.TODO_LIST_TODO_CHANGE
 );
 
 // Destructure action creators from actions object
@@ -28,13 +28,6 @@ export {
 
 ////////
 
-function onNewTodoChange(evt) {
-    return evt.target.value;
-}
-
-function onToggleCompleted(event) {
-    return {
-        id: event.target.name,
-        completed: event.target.value === 'on'
-    };
+function onToggleCompleted(id, completed) {
+    return { id, completed };
 }
