@@ -1,14 +1,14 @@
 /**
  * Created by michael.evans on 17/03/2017.
  */
-import { compose, memoize } from 'ramda';
-import { asList } from '../../utils/immutable-utils/convert-types';
+import { compose, memoize, values } from 'ramda';
+
 
 /******************************************* SELECTORS *******************************************/
 
 /**
  * NOTE: Memoizing the selectors will ensure that mapStateToProps does not cause a wasted render. Note that we
- * memoize the returned value of _getTodo, _getCompletedTodos and _getUncompletedTodos. That's because these
+ * memoize the returned value of _getTodo, selectCompletedToDos and selectUncompletedToDos. That's because these
  * are the state slices that are not affected by changes to the other state slices. We cannot memoize state or
  * todoList, because a change in any of the xTodos slices will cause the state and todoList objects to be created
  * again (via the immutable reducers). When this happens, new objects are created, and ramda's memoization function,
@@ -30,22 +30,22 @@ import { asList } from '../../utils/immutable-utils/convert-types';
  *
  */
 
-const _getTodos = state => state.getIn(['todoList', 'todos']);
-const _getCompletedTodos = state => state.getIn(['todoList', 'completedTodos']);
-const _getUncompletedTodos = state => state.getIn(['todoList', 'unCompletedTodos']);
+const selectToDos = state => state.todoList.todos;
+const selectCompletedToDos = state => state.todoList.completedTodos;
+const selectUncompletedToDos = state => state.todoList.unCompletedTodos;
 
 
 // Memoized selectors
 export default {
-    getAllTodos: compose(memoize(todos => asList(todos)), _getTodos),
-    getCompletedTodos: compose(memoize(completedTodos => asList(completedTodos)), _getCompletedTodos),
-    getUncompletedTodos: compose(memoize(uncompletedTodos => asList(uncompletedTodos)), _getUncompletedTodos)
+    getAllTodos: compose(memoize(values), selectToDos),
+    getCompletedTodos: compose(memoize(values), selectCompletedToDos),
+    getUncompletedTodos: compose(memoize(values), selectUncompletedToDos)
 };
 
 // Unmemoized selectors
 // export default {
-//     getAllTodos: compose(asList, _getTodos),
-//     getCompletedTodos: compose(asList, _getCompletedTodos),
-//     getUncompletedTodos: compose(asList, _getUncompletedTodos)
+//     getAllTodos: compose(values, selectToDos),
+//     getCompletedTodos: compose(values, selectCompletedToDos),
+//     getUncompletedTodos: compose(values, selectUncompletedToDos)
 // };
 

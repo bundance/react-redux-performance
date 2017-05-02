@@ -22,8 +22,9 @@
     "redux-devtools-extension": "^2.13.0",
     "redux-immutable": "^3.1.0",
     "reselect": "^2.5.4",
-    "weaktuplemap": "^1.0.0",
-    "spawn-sync": "^1.0.15"
+    "spawn-sync": "^1.0.15",
+    "update-immutable": "^1.1.0",
+    "weaktuplemap": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

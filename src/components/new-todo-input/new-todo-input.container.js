@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import NewTodoInput from './new-todo-input.component';
-import { toJS } from '../../utils/immutable-utils/to-js';
 import {
     onTodoChange,
     addTodo
@@ -12,4 +11,4 @@ const mapDispatchToProps = ({
     addTodo
 });
 
-export default connect(null, mapDispatchToProps)(WhyDidYouUpdate(toJS(NewTodoInput)));
+export default connect(null, mapDispatchToProps)(WhyDidYouUpdate(NewTodoInput));
