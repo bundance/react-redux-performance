@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Todo from '../todo/todo.component';
+import Todo from '../todo/todo.container';
 
 export default class Todos extends React.PureComponent {
     static propTypes = {
@@ -15,17 +15,18 @@ export default class Todos extends React.PureComponent {
     render() {
         const { todos, hideCompleted } = this.props;
 
-        return(
+        return (
            <ul>
                {todos && todos.map((todo, index) => (
                    <li key={todo.id} className={hideCompleted && todo.completed ? 'hide' : 'show'}>
                        <input type="checkbox" 
                               name={todo.id} 
                               checked={todo.completed} 
-                              onChange={this.onToggleCompleted} />
+                              onChange={this.onToggleCompleted}
+                       />
                        <Todo todo={todo} />
-                   </li>))
-               }
+                   </li>
+               ))}
            </ul>
        ) 
     }

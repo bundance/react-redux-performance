@@ -30,12 +30,12 @@ const selectToDos = state => state.todoList.todos;
 
 
 // Memoized selectors
-export default {
-    getAllTodos: compose(memoize(values), selectToDos)
-};
+// export default {
+//     getAllTodos: compose(memoize(values), selectToDos)
+// };
 
 // Unmemoized selectors
-// export default {
-//     getAllTodos: compose(values, selectToDos),
-// };
+export default {
+    getAllTodos: compose(values, selectToDos)
+};
 

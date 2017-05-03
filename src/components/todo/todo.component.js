@@ -6,7 +6,9 @@ export default class Todo extends React.Component {
         todo: PropTypes.object
     };
 
-    // This stops unnecessary re-renders of the ToDo component. Note that it must only compare Todo.text, as this
+    // This stops unnecessary re-renders of the ToDo component. 
+    // 
+    // Note that it must only compare Todo.text, as this
     // is the only property of the todo object that's rendered. If you compare todo.id, the component will both
     // render when it should, and not render when it shouldn't.
     //
