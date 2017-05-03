@@ -1,48 +1,33 @@
-import React from 'react';
-import Todos from '../todos/todos.container.js';
-import CompletedTodos from '../completed-todos/completed-todos.container.js';
-import UncompletedTodos from '../uncompleted-todos/uncompleted-todos.container.js';
-import './todo-list.css';
-import NewTodoInput from '../new-todo-input/new-todo-input.container';
+import React, { PropTypes } from 'react';
+import Todo from '../todo/todo.container';
 
-class ToDoList extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        
-        this.state = {
-            hideCompleted: false
-        }
-    }
-
-    onToggleHideCompleted = () => {
-        this.setState({ hideCompleted: !this.state.hideCompleted })
+export default class TodoList extends React.PureComponent {
+    static propTypes = {
+        todos: PropTypes.array,
+        toggleCompleted: PropTypes.func.isRequired,
+        hideCompleted: PropTypes.bool
     };
-    
+
+    onToggleCompleted = (event) => {
+        this.props.toggleCompleted(event.target.name, event.target.value === 'on');
+    };
+
     render() {
-        const { hideCompleted } = this.state;
+        const { todos, hideCompleted } = this.props;
 
         return (
-            <div className="todo-list">
-                <NewTodoInput />
-                <h3>All Todos</h3>
-                <Todos hideCompleted={ false }/>
-                
-                <h3>Completed Todos</h3>
-                {!hideCompleted && <CompletedTodos />}
-
-                <h3>Uncompleted Todos</h3>
-                {!hideCompleted && <UncompletedTodos />}
-
-                <div>
-                    <button onClick={this.onToggleHideCompleted}>
-                        {hideCompleted ? 'Show' : 'Hide'} Completed
-                    </button>
-                </div>
-            </div>
-        )
+           <ul>
+               {todos && todos.map((todo, index) => (
+                   <li key={todo.id} className={hideCompleted && todo.completed ? 'hide' : 'show'}>
+                       <input type="checkbox" 
+                              name={todo.id} 
+                              checked={todo.completed} 
+                              onChange={this.onToggleCompleted}
+                       />
+                       <Todo todo={todo} />
+                   </li>
+               ))}
+           </ul>
+       ) 
     }
 }
-
-export default ToDoList;
-
-

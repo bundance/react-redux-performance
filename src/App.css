@@ -22,3 +22,8 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.todo-list {
+  text-align: left;
+  padding: 20px;
+}

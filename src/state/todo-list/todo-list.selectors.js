@@ -1,8 +1,5 @@
-/**
- * Created by michael.evans on 17/03/2017.
- */
 import { compose, memoize, values } from 'ramda';
-
+import { TODO_LIST, TODOS } from '../../constants/todo-list/todo-list.constants';
 
 /******************************************* SELECTORS *******************************************/
 
@@ -30,22 +27,16 @@ import { compose, memoize, values } from 'ramda';
  *
  */
 
-const selectToDos = state => state.todoList.todos;
-const selectCompletedToDos = state => state.todoList.completedTodos;
-const selectUncompletedToDos = state => state.todoList.unCompletedTodos;
+const selectToDos = state => state[TODO_LIST][TODOS];
 
 
 // Memoized selectors
-export default {
-    getAllTodos: compose(memoize(values), selectToDos),
-    getCompletedTodos: compose(memoize(values), selectCompletedToDos),
-    getUncompletedTodos: compose(memoize(values), selectUncompletedToDos)
-};
+export const getAllTodosMemoized = compose(memoize(values), selectToDos);
+export const getAllTodosUnmemoized = compose(values, selectToDos);
 
-// Unmemoized selectors
-// export default {
-//     getAllTodos: compose(values, selectToDos),
-//     getCompletedTodos: compose(values, selectCompletedToDos),
-//     getUncompletedTodos: compose(values, selectUncompletedToDos)
-// };
+export default {
+    // change this to getAllTodosUnmemoized or getAllTodosMemoized, depending on whether you want to use an 
+    // unmemoized or memoized selector
+    getAllTodos: getAllTodosUnmemoized
+};
 
