@@ -8,14 +8,10 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            hideCompleted: false
-        }
+        this.state = { hideCompleted: false }
     }
 
-    onToggleHideCompleted = () => {
-        this.setState({ hideCompleted: !this.state.hideCompleted })
-    };
+    onToggleHideCompleted = () => this.setState({ hideCompleted: !this.state.hideCompleted });
 
     render() {
         const { hideCompleted } = this.state;

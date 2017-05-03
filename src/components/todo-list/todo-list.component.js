@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Todo from '../todo/todo.container';
 
-export default class Todos extends React.PureComponent {
+export default class TodoList extends React.PureComponent {
     static propTypes = {
         todos: PropTypes.array,
         toggleCompleted: PropTypes.func.isRequired,
