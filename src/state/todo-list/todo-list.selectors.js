@@ -1,4 +1,5 @@
 import { compose, memoize, values } from 'ramda';
+import { TODO_LIST, TODOS } from '../../constants/todo-list/todo-list.constants';
 
 /******************************************* SELECTORS *******************************************/
 
@@ -26,7 +27,7 @@ import { compose, memoize, values } from 'ramda';
  *
  */
 
-const selectToDos = state => state.todoList.todos;
+const selectToDos = state => state[TODO_LIST][TODOS];
 
 
 // Memoized selectors
@@ -36,6 +37,6 @@ export const getAllTodosUnmemoized = compose(values, selectToDos);
 export default {
     // change this to getAllTodosUnmemoized or getAllTodosMemoized, depending on whether you want to use an 
     // unmemoized or memoized selector
-    getAllTodos: getAllTodosUnmemoized  
+    getAllTodos: getAllTodosUnmemoized
 };
 
