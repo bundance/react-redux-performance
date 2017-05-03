@@ -5,8 +5,6 @@ export const TODO_LIST_TOGGLE_COMPLETED = 'TODO_LIST_TOGGLE_COMPLETED';
 
 // STORE KEYS
 export const TODO_LIST = 'todoList';
-export const COMPLETED_TODOS = 'completedTodos';
-export const UNCOMPLETED_TODOS = 'unCompletedTodos';
 export const TODOS = 'todos';
 export const NEW_TODO = 'newTodo';
 
