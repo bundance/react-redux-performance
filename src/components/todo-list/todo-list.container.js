@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Todos from './todos.component.js';
+import Todos from './todo-list.component.js';
 import { toggleCompleted } from '../../state/todo-list/todo-list.actions.js';
 import selectors from '../../state/todo-list/todo-list.selectors.js';
 import WhyDidYouUpdate from '../../utils/perf/why-did-you-update';

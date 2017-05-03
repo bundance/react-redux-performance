@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-// import TodoList from './components/todo-list1/todo-list1.component.js';
 import NewTodoInput from './components/new-todo-input/new-todo-input.container';
-import Todos from './components/todos/todos.container';
+import TodoList from './components/todo-list/todo-list.container';
 
 class App extends Component {
     constructor(props) {
@@ -34,7 +33,7 @@ class App extends Component {
 
                         <h3>All Todos</h3>
 
-                        <Todos hideCompleted={ hideCompleted }/>
+                        <TodoList hideCompleted={ hideCompleted }/>
 
                         <div>
                             <button onClick={this.onToggleHideCompleted}>
