@@ -16,12 +16,13 @@ export default class Todo extends React.Component {
     // tries to trigger one, as the whole point of shouldComponentUpdate is to stop wasteful re-renders!  
     //
     // To detect wasteful mapStateToProps, use the WhyDidYouUpdate HoC
-    shouldComponentUpdate(nextProps, nextState) {
-        return !(
-            nextProps.todo.text === this.props.todo.text
-            && nextProps.todo.completed === this.props.todo.completed
-        );
-    }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return !(
+    //         nextProps.todo.text === this.props.todo.text
+    //         && nextProps.todo.completed === this.props.todo.completed
+    //     );
+    // }
 
     render() {
         const { todo } = this.props;

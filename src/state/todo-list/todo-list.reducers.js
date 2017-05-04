@@ -1,8 +1,8 @@
+import update from 'update-immutable';
 import { keys } from 'ramda';
 import { handleActions } from 'redux-actions';
 import initialState from './initial.state';
 import * as todoListConstants from '../../constants/todo-list/todo-list.constants';
-import update from 'update-immutable';
 
 export default handleActions({
     [todoListConstants.TODO_LIST_ADD_TODO]: addTodo,
@@ -10,11 +10,12 @@ export default handleActions({
     [todoListConstants.TODO_LIST_TOGGLE_COMPLETED]: toggleCompleted
 }, initialState);
 
+////// SLICE REDUCERS //////
 
-function addTodo(state) {
+function addTodo(state, action) {
     const [...todos] = keys(state[todoListConstants.TODOS]);
     const id = todos ? todos.length : 0;
-    const text = state[todoListConstants.NEW_TODO];
+    const text = action.payload;
 
     return update(state, {
         [todoListConstants.TODOS]: {
@@ -32,7 +33,9 @@ function addTodo(state) {
 function todoChange(state, action) {
     return update(state, {
         [todoListConstants.NEW_TODO]: {
-            $set: action.payload
+            [todoListConstants.TEXT]: {
+                $set: action.payload
+            }
         }
     });
 }

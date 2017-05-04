@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+
+// change this to '../todo/todo.component' and see how many re-renders are triggered!
 import Todo from '../todo/todo.container';
 
 export default class TodoList extends React.PureComponent {

@@ -2,5 +2,7 @@ import * as todoListConstants from '../../constants/todo-list/todo-list.constant
 
 export default {
     [todoListConstants.TODOS]: {},
-    [todoListConstants.NEW_TODO]: ''
+    [todoListConstants.NEW_TODO]: {
+        [todoListConstants.TEXT]: ''
+    }
 };

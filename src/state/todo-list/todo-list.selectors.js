@@ -37,6 +37,6 @@ export const getAllTodosUnmemoized = compose(values, selectToDos);
 export default {
     // change this to getAllTodosUnmemoized or getAllTodosMemoized, depending on whether you want to use an 
     // unmemoized or memoized selector
-    getAllTodos: getAllTodosUnmemoized
+    getAllTodos: getAllTodosMemoized
 };
 
