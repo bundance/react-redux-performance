@@ -1,5 +1,4 @@
 import update from 'update-immutable';
-import { keys } from 'ramda';
 import { handleActions } from 'redux-actions';
 import initialState from './initial.state';
 import * as todoListConstants from '../../constants/todo-list/todo-list.constants';
@@ -14,7 +13,7 @@ export default handleActions({
 ////// SLICE REDUCERS //////
 
 function addTodo(state, action) {
-    const [...todos] = keys(state[todoListConstants.TODOS]);
+    const [...todos] = Object.keys(state[todoListConstants.TODOS]);
     const id = todos ? todos.length : 0;
     const text = action.payload;
 
