@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import NewTodoInput from './components/new-todo-input/new-todo-input.container';
+import NewTodo from './components/new-todo/new-todo.container';
 import TodoList from './components/todo-list/todo-list.container';
 
 class App extends Component {
@@ -25,7 +25,7 @@ class App extends Component {
                 <div className="App-intro">
                     <div className="todo-list">
 
-                        <NewTodoInput />
+                        <NewTodo />
 
                         <h3>All Todos</h3>
 
