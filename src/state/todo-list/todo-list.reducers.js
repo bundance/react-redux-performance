@@ -3,11 +3,12 @@ import { keys } from 'ramda';
 import { handleActions } from 'redux-actions';
 import initialState from './initial.state';
 import * as todoListConstants from '../../constants/todo-list/todo-list.constants';
+import * as actions from './todo-list.actions';
 
 export default handleActions({
-    [todoListConstants.TODO_LIST_ADD_TODO]: addTodo,
-    [todoListConstants.TODO_LIST_TODO_CHANGE]: todoChange,
-    [todoListConstants.TODO_LIST_TOGGLE_COMPLETED]: toggleCompleted
+    [actions.TODO_LIST_ADD_TODO]: addTodo,
+    [actions.TODO_LIST_TODO_CHANGE]: todoChange,
+    [actions.TODO_LIST_TOGGLE_COMPLETED]: toggleCompleted
 }, initialState);
 
 ////// SLICE REDUCERS //////
