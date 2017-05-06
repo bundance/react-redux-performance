@@ -33,11 +33,7 @@ function addTodo(state, action) {
 
 function todoChange(state, action) {
     return update(state, {
-        [todoListConstants.NEW_TODO]: {
-            [todoListConstants.TEXT]: {
-                $set: action.payload
-            }
-        }
+        [todoListConstants.NEW_TODO]: { $set: action.payload }
     });
 }
 
