@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import NewTodoInput from './new-todo-input.component';
+import NewTodo from './new-todo.component';
 import {
     onTodoChange,
     addTodo
@@ -16,4 +16,4 @@ const mapDispatchToProps = ({
     addTodo
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WhyDidYouUpdate(NewTodoInput));
+export default connect(mapStateToProps, mapDispatchToProps)(WhyDidYouUpdate(NewTodo));

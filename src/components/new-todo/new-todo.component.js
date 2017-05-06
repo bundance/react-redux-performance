@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-export default class NewTodoInput extends React.PureComponent {
+export default class NewTodo extends React.PureComponent {
     static propTypes = {
         addTodo: PropTypes.func.isRequired,
         onTodoChange: PropTypes.func.isRequired,
