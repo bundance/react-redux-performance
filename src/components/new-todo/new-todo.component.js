@@ -2,17 +2,17 @@ import React, { PropTypes } from 'react';
 
 export default class NewTodo extends React.PureComponent {
     static propTypes = {
-        onAddTodo: PropTypes.func.isRequired,
-        onTodoChange: PropTypes.func.isRequired,
+        handleAddTodo: PropTypes.func.isRequired,
+        handleTodoChange: PropTypes.func.isRequired,
         text: PropTypes.string
     };
 
     handleClick = () => {
-        this.props.onAddTodo(this.props.text);
+        this.props.handleAddTodo(this.props.text);
     };
 
     handleToDoChange = (event) => {
-        this.props.onTodoChange(event.target.value)
+        this.props.handleTodoChange(event.target.value)
     };
 
     render() {

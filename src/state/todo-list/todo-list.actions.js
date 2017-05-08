@@ -26,8 +26,8 @@ const {
 
 // Rename and Export Public Action Creators
 export {
-    todoListAddTodo as onAddTodo,
-    todoListTodoChange as onTodoChange,
+    todoListAddTodo as handleAddTodo,
+    todoListTodoChange as handleTodoChange,
     todoListToggleCompleted as toggleCompleted
 };
 
