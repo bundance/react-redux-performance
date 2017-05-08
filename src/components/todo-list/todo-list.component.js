@@ -10,7 +10,7 @@ export default class TodoList extends React.PureComponent {
         hideCompleted: PropTypes.bool
     };
 
-    onToggleCompleted = (event) => {
+    handleCheckboxChange = (event) => {
         this.props.toggleCompleted(event.target.name, event.target.value === 'on');
     };
 
@@ -24,9 +24,11 @@ export default class TodoList extends React.PureComponent {
                        <input type="checkbox" 
                               name={todo.id} 
                               checked={todo.completed} 
-                              onChange={this.onToggleCompleted}
+                              onChange={this.handleCheckboxChange}
                        />
+
                        <Todo todo={todo} />
+
                    </li>
                ))}
            </ul>

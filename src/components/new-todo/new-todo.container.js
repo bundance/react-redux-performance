@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import NewTodo from './new-todo.component';
 import {
-    onTodoChange,
-    addTodo
+    handleTodoChange,
+    handleAddTodo
 } from '../../state/todo-list/todo-list.actions';
 import { selectNewTodo } from '../../state/new-todo/new-todo.selectors';
 import WhyDidYouUpdate from '../../utils/perf/why-did-you-update';
@@ -12,8 +12,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = ({
-    onTodoChange,
-    addTodo
+    handleTodoChange,
+    handleAddTodo
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WhyDidYouUpdate(NewTodo));
