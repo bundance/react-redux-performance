@@ -4,8 +4,9 @@ import Todo from '../todo/todo.component';
 
 export default class TodoList extends React.Component {
     static propTypes = {
+        hideCompleted: PropTypes.bool,
         todos: PropTypes.array,
-        hideCompleted: PropTypes.bool
+        toggleCompleted: PropTypes.func
     };
 
     handleToggleCompletedTodo = event => this.props.toggleCompleted(event.target.name, event.target.value === 'on');
@@ -18,7 +19,10 @@ export default class TodoList extends React.Component {
                {todos && todos.map((todo, index) => (
                    <li key={todo.id} className={hideCompleted && todo.completed ? 'hide' : 'show'}>
 
-                       <Todo todo={todo} toggleCompletedToDo={this.handleToggleCompletedTodo} />
+                       <Todo
+                           todo={todo}
+                           toggleCompletedTodo={this.handleToggleCompletedTodo}
+                       />
 
                    </li>
                ))}
