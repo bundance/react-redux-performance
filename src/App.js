@@ -4,7 +4,7 @@ import './App.css';
 import NewTodo from './components/new-todo/new-todo.container';
 import TodoList from './components/todo-list/todo-list.container';
 
-class App extends Component {
+export default class App extends Component {
     constructor(props) {
         super(props);
 
@@ -25,11 +25,9 @@ class App extends Component {
                 <div className="App-intro">
                     <div className="todo-list">
 
-                        <NewTodo />
+                        <NewTodo  />
 
-                        <h3>All Todos</h3>
-
-                        <TodoList hideCompleted={ hideCompleted }/>
+                        <TodoList hideCompleted={ hideCompleted } />
 
                         <div>
                             <button onClick={this.onToggleHideCompleted}>
@@ -42,5 +40,3 @@ class App extends Component {
         );
     }
 }
-
-export default App;

@@ -1,39 +1,31 @@
 import React, { PropTypes } from 'react';
 import './todo.css'
 
-export default class Todo extends React.Component {
+export default class Todo extends React.PureComponent {
     static propTypes = {
-        todo: PropTypes.object
+        todo: PropTypes.object,
+        toggleCompletedToDo: PropTypes.func.isRequired,
     };
 
-    /**
-    * shouldComponentUpdate() will stop unnecessary re-renders of the ToDo component.
-    *
-    * Note that it must only compare Todo.text and todo.completed, as this
-    * are the only properties of the todo object that are rendered. If you compare todo.id, the component
-    * will both render when it should, and not render when it shouldn't.
-    *
-    * Note also that this will stop React Perf from reporting a wasteful re-rendering, even if mapStateToProps
-    * tries to trigger one, as the whole point of shouldComponentUpdate is to stop wasteful re-renders!
-    *
-    * To detect wasteful mapStateToProps, use the WhyDidYouUpdate HoC
-    */
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return !(
-    //         nextProps.todo.text === this.props.todo.text
-    //         && nextProps.todo.completed === this.props.todo.completed
-    //     );
-    // }
-
     render() {
-        const { todo } = this.props;
+        const { todo, toggleCompletedToDo } = this.props;
 
         const isCompletedClassname = todo.completed ? 'completed' : 'uncompleted';
-        
+
+        console.log('******** ToDo renderered');
+
         return (
-            <span className={isCompletedClassname} >
+            <div>
+                <input type="checkbox"
+                       name={todo.id}
+                       checked={todo.completed}
+                       onChange={toggleCompletedToDo}
+                />
+
+                <span className={isCompletedClassname} >
                 ToDo: {todo.text}
-            </span>
+                </span>
+            </div>
         )
     }
 }

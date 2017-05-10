@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 export default class NewTodo extends React.PureComponent {
     static propTypes = {
         handleAddTodo: PropTypes.func.isRequired,
-        handleTodoChange: PropTypes.func.isRequired,
+        onTodoChange: PropTypes.func.isRequired,
         text: PropTypes.string
     };
 
@@ -12,7 +12,7 @@ export default class NewTodo extends React.PureComponent {
     };
 
     handleToDoChange = (event) => {
-        this.props.handleTodoChange(event.target.value)
+        this.props.onTodoChange(event.target.value)
     };
 
     render() {
