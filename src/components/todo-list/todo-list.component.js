@@ -9,11 +9,8 @@ export default class TodoList extends React.Component {
         toggleCompleted: PropTypes.func
     };
 
-    handleToggleCompletedTodo = event =>
-        this.props.toggleCompleted(event.target.name, event.target.value === 'on');
-
     render() {
-        const { hideCompleted, todos } = this.props;
+        const { hideCompleted, toggleCompleted, todos } = this.props;
 
         return (
            <ul>
@@ -22,7 +19,8 @@ export default class TodoList extends React.Component {
 
                        <Todo
                            todo={todo}
-                           toggleCompletedTodo={this.handleToggleCompletedTodo}
+                           toggleCompletedTodo={event =>
+                               toggleCompleted(event.target.name, event.target.value === 'on')}
                        />
 
                    </li>
