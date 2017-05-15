@@ -11,8 +11,6 @@ export default class Todo extends React.PureComponent {
         const { todo, toggleCompletedTodo } = this.props;
         const isCompletedClassname = todo.completed ? 'completed' : 'uncompleted';
 
-        console.log('******** ToDo renderered');
-
         return (
             <div>
                 <input type="checkbox"
