@@ -14,7 +14,7 @@ export default class TodoList extends React.Component {
 
     render() {
         const { hideCompleted, todos } = this.props;
-
+        console.log(' ++++++ TodoList rendered +++++ ');
         return (
            <ul>
                {todos && todos.map((todo, index) => (

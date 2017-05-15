@@ -12,7 +12,7 @@ export default handleActions({
 
 ////// SLICE REDUCERS //////
 
-function addTodo(state, action) {
+export function addTodo(state, action) {
     const [...todos] = Object.keys(state[todoListConstants.TODOS]);
     const id = todos ? todos.length : 0;
     const text = action.payload;
@@ -30,13 +30,13 @@ function addTodo(state, action) {
     });
 }
 
-function todoChange(state, action) {
+export function todoChange(state, action) {
     return update(state, {
         [todoListConstants.NEW_TODO]: { $set: action.payload }
     });
 }
 
-function toggleCompleted(state, action) {
+export function toggleCompleted(state, action) {
     let todo = state[todoListConstants.TODOS][action.payload.id];
 
     return update(state, {
