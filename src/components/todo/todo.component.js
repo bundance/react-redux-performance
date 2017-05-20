@@ -1,30 +1,10 @@
 import React, { PropTypes } from 'react';
 import './todo.css'
 
-function is(x, y, log) {
-    if (x === y) {
-        const xEqualY = (x !== 0 || y !== 0 || 1 / x === 1 / y);
-        if(log) {
-            console.log({ x, y, xEqualY });
-        }
-
-        return xEqualY;
-    } else {
-        const xNotEqualX = (x !== x);
-        const yNoyEqualY = (y !== y);  // blobby - the problem's here. y !== y and x !== x. WTF?!
-
-        if (log) {
-            console.log({x, y, xNotEqualX, yNoyEqualY});
-            console.log('xNotEqualX && yNoyEqualY:', xNotEqualX && yNoyEqualY);
-        }
-        return xNotEqualX && yNoyEqualY;
-    }
-}
-
 export default class Todo extends React.Component {
     static propTypes = {
         todo: PropTypes.object,
-        toggleCompletedTodo: PropTypes.func.isRequired,
+        toggleCompletedTodo: PropTypes.func.isRequired
     };
 
     constructor(props) {
@@ -32,22 +12,19 @@ export default class Todo extends React.Component {
         this.state = {};
     }
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        console.log(`------------ TESTING ---- ${ this.props.todo.id } --------------`);
-        const propsNotEqual = !this.shallowEqual(nextProps, this.props, true);
+        const propsNotEqual = !this.shallowEqual(nextProps, this.props);
         const stateNotEqual = !this.shallowEqual(nextState, this.state);
         const contextNotEqual = !this.shallowEqual(nextContext, this.context);
 
         const retVal = propsNotEqual || stateNotEqual || contextNotEqual;
 
-        console.log({propsNotEqual, stateNotEqual , contextNotEqual });
-        console.log('props:', this.props, ', nextProps:', nextProps, ' - state:', this.state, ', nextState: ', nextState);
-        console.log(`>>>>>>>>>> back in sCU for ${this.props.todo.id} RETURNING  ${ retVal } <<<<<<<<<`);
+        console.log(`Todo ${this.props.todo.id} is ${ retVal }`);
 
         return retVal;
     }
 
     shallowEqual(objA, objB, log=false) {
-        if (is(objA, objB)) {
+        if (Object.is(objA, objB)) {
             return true;
         }
 
@@ -75,9 +52,9 @@ export default class Todo extends React.Component {
                 // console.log('objB: ', objB, 'keysA[i]:', keysA[i]);
                 // console.log('Object.hasOwnProperty.call(objB, keysA[i]):', Object.hasOwnProperty.call(objB, keysA[i]));
                 console.log('objA[keysA[i]]:', objA[keysA[i]], ', objB[keysA[i]]: ', objB[keysA[i]]);
-                console.log('!is(objA[keysA[i]], objB[keysA[i]]): ', !is(objA[keysA[i]], objB[keysA[i]]));
+                console.log('!is(objA[keysA[i]], objB[keysA[i]]): ', !Object.is(objA[keysA[i]], objB[keysA[i]]));
             }
-            if (!Object.hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]], true)) {
+            if (!Object.hasOwnProperty.call(objB, keysA[i]) || !Object.is(objA[keysA[i]], objB[keysA[i]])) {
                 if(log) {
                     console.log('**** hasOwnProps returns FALSE');
                 }
@@ -93,8 +70,6 @@ export default class Todo extends React.Component {
     render() {
         const { todo, toggleCompletedTodo } = this.props;
         const isCompletedClassname = todo.completed ? 'completed' : 'uncompleted';
-
-        console.log(' ToDo renderered, id:', todo.id);
 
         return (
             <div>

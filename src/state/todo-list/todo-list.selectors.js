@@ -1,5 +1,6 @@
 import { compose, memoize, values } from 'ramda';
 import { TODO_LIST, TODOS } from '../../constants/todo-list/todo-list.constants';
+import { createSelector } from 'reselect';
 
 /******************************************* SELECTORS *******************************************/
 
@@ -32,7 +33,11 @@ const selectToDos = state => state[TODO_LIST][TODOS];
 // Converts an object of todos keyed by id into an array of objects with the
 // properties { id, text, completed }. The todos object returned from selectToDos() is memoized, and so if the same
 // object is returned by selectTodos() on a subsequent call, the same, previously memoized, array is returned.
-export const getAllTodosMemoized = compose(memoize(values), selectToDos);
+export const getAllTodosMemoized = createSelector(
+    [compose(values, selectToDos)],
+    todos => todos
+);
+
 
 // Unmemoized selector
 // Converts an object of todos keyed by id into an array of objects with the
