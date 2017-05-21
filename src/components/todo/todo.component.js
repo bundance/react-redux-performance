@@ -11,6 +11,7 @@ export default class Todo extends React.Component {
         super(props);
         this.state = {};
     }
+    
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         const propsNotEqual = !this.shallowEqual(nextProps, this.props);
         const stateNotEqual = !this.shallowEqual(nextState, this.state);
