@@ -4,7 +4,6 @@ import Todo from '../todo/todo.component';
 
 export default class TodoList extends React.Component {
     static propTypes = {
-        hideCompleted: PropTypes.bool,
         todos: PropTypes.array,
         toggleCompleted: PropTypes.func
     };
@@ -13,12 +12,13 @@ export default class TodoList extends React.Component {
         this.props.toggleCompleted(event.target.name, event.target.value === 'on');
 
     render() {
-        const { hideCompleted, todos } = this.props;
+        const { todos } = this.props;
         console.log(' ++++++ TodoList rendered +++++ ');
+
         return (
            <ul>
                {todos && todos.map((todo, index) => (
-                   <li key={todo.id} className={hideCompleted && todo.completed ? 'hide' : 'show'}>
+                   <li key={todo.id} >
 
                        <Todo
                            todo={todo}

@@ -5,7 +5,7 @@ import * as actions from './todo-list.actions';
 
 
 describe('reducer: todoList.reducer', () => {
-    describe('on TODO_LIST_TOGGLE_COMPLETED', () => {
+    describe('on TOGGLE_COMPLETED', () => {
         it('should toggle the completed state of the todo', () => {
 
             // perform a deepFreeze on the initial state object
@@ -23,7 +23,7 @@ describe('reducer: todoList.reducer', () => {
             let payload = {id: 0};
 
             let changedState = toggleCompleted(initialState, {
-                type: actions.TODO_LIST_TOGGLE_COMPLETED,
+                type: actions.TOGGLE_COMPLETED,
                 payload
             });
 

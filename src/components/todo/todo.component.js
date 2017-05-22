@@ -17,7 +17,7 @@ export default class Todo extends React.Component {
         // shouldUpdate is true if the component should update (i.e. nextProps or nextState is different from
         // this.props or this.state)
         const shouldUpdate = shallowCompare(this, nextProps, nextState);
-        console.log(`Todo ${this.props.todo.id} shouldUpdate is ${ shouldUpdate }`);
+        console.log(`Todo ${this.props.todo.id} shouldUpdate() returns ${ shouldUpdate }`);
 
         return shouldUpdate;
     }
